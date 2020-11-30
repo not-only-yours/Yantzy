@@ -86,15 +86,49 @@ public class Turns {
         System.out.println();
     }
 
+
     public static void Bothturns(){
         Integer a = 0;
         do{
             playerturn();
-
+            LogicOfComputerturn.calculateBest(a);
             a++;
         }while (a<13);
+        countTable();
     }
 
+
+    public static void countTable(){
+        Integer computerSum = 0;
+        Integer playerSum = 0;
+        for(int i=0;i<13;i++){
+            if (computer[i] == null){
+                computer[i] = 0;
+            }
+        }
+
+        for(int i=0;i<6;i++){
+            computerSum += computer[i];
+                playerSum += player[i];
+        }
+        if(computerSum > 63){
+            computerSum +=35;
+        }
+        if(playerSum > 63){
+            playerSum+=35;
+        }
+        for(int i=6;i<13;i++){
+            computerSum += computer[i];
+            playerSum += player[i];
+        }
+        System.out.println("Player points: "+ playerSum);
+        System.out.println("Computer points: "+computerSum);
+        if(computerSum > playerSum){
+            System.out.println("Computer win");
+        }else{
+            System.out.println("Player win");
+        }
+    }
 
     public static Integer[] priseThatYouCanTake(Integer[] a, Integer[] turn){
         Integer[] ans = new Integer[13];
@@ -174,6 +208,25 @@ public class Turns {
         showBothCards();
     }
 
+    public static void setCorrectComputerPrise(Integer[] a, Integer[] num){
+        Integer maximum = 0;
+        Integer position = 0;
+        for(int i=0;i<num.length;i++) {
+            if(num[i]>maximum){
+                maximum = num[i];
+                position = i;
+            }
+        }
+        if(position == 0){
+            for(int i=0;i<num.length;i++){
+                if(num[i] == null){
+                    position = i;
+                }
+            }
+        }
+        a[position] = maximum;
 
+        showBothCards();
+    }
 }
 

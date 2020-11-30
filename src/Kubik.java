@@ -22,4 +22,14 @@ public class Kubik {
         }
         Arrays.sort(Turns.turn);
     }
+
+    public static Integer[] createKubik(int a,int b, int c, int d, int e){
+        Integer[] i = new Integer[5];
+        i[0] = a;
+        i[1] = b;
+        i[2] = c;
+        i[3] = d;
+        i[4] = e;
+        return i;
+    }
 }
