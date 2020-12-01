@@ -65,6 +65,7 @@ class LogicOfComputerturn {
             easyRolling(root);
         else
             easyRolling(root);
+
             makeTurn(root,expectimax(root, true));
     }
 

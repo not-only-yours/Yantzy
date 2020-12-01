@@ -50,21 +50,30 @@ public class Turns {
 
 
     public static void showBothCards(){
+        String playerCard = "";
         System.out.print("Player card: ");
         for (Integer integer : player) {
-            if(integer != null)
-            System.out.print(integer + ", ");
-            else
+            if(integer != null) {
+                System.out.print(integer + ", ");
+                playerCard += integer.toString() + ", ";
+            }else {
+                playerCard +=  "  , ";
                 System.out.print("  , ");
+            }
         }
         System.out.println();
+        String computerCard = "";
         System.out.print("Computer card: ");
         for (Integer integer : computer) {
-            if(integer != null)
+            if (integer != null) {
                 System.out.print(integer + ", ");
-            else
+                computerCard +=integer + ", ";
+            } else {
+                computerCard += "  , ";
                 System.out.print("  , ");
+            }
         }
+
         System.out.println();
     }
 
@@ -210,23 +219,31 @@ public class Turns {
 
     public static void setCorrectComputerPrise(Integer[] a, Integer[] num){
         Integer maximum = 0;
-        Integer position = 0;
+        Integer position = -1;
         for(int i=0;i<num.length;i++) {
             if(num[i]>maximum){
                 maximum = num[i];
                 position = i;
             }
         }
-        if(position == 0){
-            for(int i=0;i<num.length;i++){
-                if(num[i] == null){
-                    position = i;
-                }
-            }
+        if(position == -1){
+                    position = getFirstEmpty();
         }
         a[position] = maximum;
 
         showBothCards();
+    }
+
+
+    public static int getFirstEmpty() {
+        for (int i = 0; i < Turns.computer.length; i++) {
+            try {
+                Turns.computer[i].toString();
+            } catch (NullPointerException e) {
+                return i;
+            }
+        }
+        return 0;
     }
 }
 
